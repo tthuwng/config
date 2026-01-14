@@ -1,11 +1,16 @@
 #!/bin/bash
 set -e
 
-ln -s "${PWD}/zshrc" ~/.zshrc
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-brew bundle --verbose
+# Homebrew
+command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew bundle --file="$DIR/Brewfile"
 
-# symbolic links
-ln -sf "${PWD}/vimrc" "${HOME}/.vimrc"
-ln -sf "${PWD}/tmux.conf" "${HOME}/.tmux.conf"
-ln -sf "${PWD}/zshrc" "${HOME}/.zshrc"
+# Symlinks
+ln -sf "$DIR/zshrc" ~/.zshrc
+ln -sf "$DIR/tmux.conf" ~/.tmux.conf
+ln -sf "$DIR/gitconfig" ~/.gitconfig
+
+# TPM
+[ -d ~/.tmux/plugins/tpm ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

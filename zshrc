@@ -1,23 +1,63 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
-export EDITOR='vim'
-export CLICOLOR=1
-export PS1=$'%n@%m:\e[0;36m%~\e[0m$ '
+eval "$(starship init zsh)"
 
-HISTSIZE=10000
-SAVEHIST=10000
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_SAVE_NO_DUPS
-setopt INC_APPEND_HISTORY
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 
-alias ls='ls --color=auto'
-alias ll='ls -lah'
-alias grep='grep --color=auto'
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/hungtran/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/hungtran/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/hungtran/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/hungtran/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 
 
-# auto/tab completion
-autoload -U compinit
+. "$HOME/.local/bin/env"
+
+# node
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# pnpm
+export PNPM_HOME="/Users/hungtran/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
+# vals ai
+export VALS_SERVER_ENV=LOCAL
+export REDIS_ENDPOINT=localhost
+export PYTHONHASHSEED=0
+export VALS_ENV=LOCAL
+
+alias zshe='vim ~/.zshrc'
+alias szsh='source ~/.zshrc'
+alias cvals='conda activate vals'
+alias codex5='codex -m gpt-5-codex -c model_reasoning_effort="high" --search --yolo'
+
+source <(fzf --zsh)
+
+
+# Added by Amplify CLI binary installer
+export PATH="$HOME/.amplify/bin:$PATH"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/hungtran/.docker/completions $fpath)
+autoload -Uz compinit
 compinit
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# End of Docker CLI completions
+eval "$(direnv hook zsh)"
 
 
+alias s='kitten ssh'
