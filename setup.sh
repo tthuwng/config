@@ -11,6 +11,8 @@ brew bundle --file="$DIR/Brewfile"
 ln -sf "$DIR/zshrc" ~/.zshrc
 ln -sf "$DIR/tmux.conf" ~/.tmux.conf
 ln -sf "$DIR/gitconfig" ~/.gitconfig
+mkdir -p ~/.config/kitty
+ln -sf "$DIR/kitty.conf" ~/.config/kitty/kitty.conf
 
 # TPM
 [ -d ~/.tmux/plugins/tpm ] || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
