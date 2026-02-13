@@ -4,22 +4,6 @@ export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export LDFLAGS="-L/opt/homebrew/opt/postgresql@15/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/postgresql@15/include"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/hungtran/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/hungtran/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/hungtran/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/hungtran/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
 . "$HOME/.local/bin/env"
 
 # node
@@ -61,3 +45,20 @@ eval "$(direnv hook zsh)"
 
 
 alias s='kitten ssh'
+
+# bun completions
+[ -s "/Users/huwng/.bun/_bun" ] && source "/Users/huwng/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+#asdf
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+export PATH="$PATH:/Users/huwng/code/depot_tools"
+export PATH=~/.npm-global/bin:$PATH
+export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
+
+export HOMEBREW_NO_AUTO_UPDATE=1
+alias claude="/Users/huwng/.claude/local/claude"
