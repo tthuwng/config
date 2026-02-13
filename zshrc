@@ -1,3 +1,20 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export EDITOR='vim'
+export CLICOLOR=1
+export PS1=$'%n@%m:\e[0;36m%~\e[0m$ '
+
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt INC_APPEND_HISTORY
+
+alias ls='ls --color=auto'
+alias ll='ls -lah'
+alias grep='grep --color=auto'
+alias s='kitty +kitten ssh'
+alias claude="/Users/huwng/.claude/local/claude"
+
 eval "$(starship init zsh)"
 
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
@@ -44,8 +61,6 @@ compinit
 eval "$(direnv hook zsh)"
 
 
-alias s='kitten ssh'
-
 # bun completions
 [ -s "/Users/huwng/.bun/_bun" ] && source "/Users/huwng/.bun/_bun"
 
@@ -61,4 +76,3 @@ export PATH=~/.npm-global/bin:$PATH
 export PATH="/opt/homebrew/opt/ccache/libexec:$PATH"
 
 export HOMEBREW_NO_AUTO_UPDATE=1
-alias claude="/Users/huwng/.claude/local/claude"
